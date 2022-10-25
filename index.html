@@ -9,38 +9,42 @@
   </head>
   <body>
     <div class="wrapper">
-      <fieldset>
-        <div class="preset">
-          <img
-            src="https://vacinasnet.vteximg.com.br/arquivos/ids/156769-320-320/PlanoSenior.png?v=637951605753600000"
-            alt="Plano Gestante"
-            class="preset__thumb"
-          />
-          <input
-            type="radio"
-            name="preset__option"
-            id="preset-gestante"
-            class="preset__option"
-            value="Gestante"
-          />
-          <label for="preset-gestante" class="preset__title">Gestante</label>
-        </div>
-        <div class="preset">
-          <img
-            src="https://vacinasnet.vteximg.com.br/arquivos/ids/156758-320-320/Plano-Herois2.png?v=637951574533370000"
-            alt="Plano Gestante"
-            class="preset__thumb"
-          />
-          <input
-            type="radio"
-            name="preset__option"
-            id="preset-2a9"
-            class="preset__option"
-            value="2 a 9 meses"
-          />
-          <label for="preset-2a9" class="preset__title">2 a 9 meses</label>
-        </div>
-      </fieldset>
+      <form>
+        <fieldset>
+          <div class="preset">
+            <img
+              src="https://vacinasnet.vteximg.com.br/arquivos/ids/156769-320-320/PlanoSenior.png?v=637951605753600000"
+              alt="Plano Gestante"
+              class="preset__thumb"
+            />
+            <input
+              type="radio"
+              name="preset__option"
+              id="preset-gestante"
+              class="preset__option"
+              value="Gestante"
+            />
+            <label for="preset-gestante" class="preset__title">Gestante</label>
+          </div>
+          <div class="preset">
+            <img
+              src="https://vacinasnet.vteximg.com.br/arquivos/ids/156758-320-320/Plano-Herois2.png?v=637951574533370000"
+              alt="Plano Gestante"
+              class="preset__thumb"
+            />
+            <input
+              type="radio"
+              name="preset__option"
+              id="preset-2a9"
+              class="preset__option"
+              value="2 a 9 meses"
+            />
+            <label for="preset-2a9" class="preset__title">2 a 9 meses</label>
+          </div>
+        </fieldset>
+        <button type="submit" id="submit-preset">Continuar</button>
+      </form>
+      <pre class="preset-escolhido"></pre>
     </div>
     <script src="js/main.js"></script>
   </body>

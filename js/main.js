@@ -189,3 +189,17 @@ const VACINAS = [
     sku: 284,
   },
 ];
+
+let presetEscolhido;
+
+const handlePreset = (e) => {
+  e.preventDefault();
+  let formData = new FormData(e.target.form);
+  let option = formData.get("preset__option");
+
+  presetEscolhido = PRESETS.filter((elem) => elem.nome == option);
+};
+
+document
+  .getElementById("submit-preset")
+  .addEventListener("click", handlePreset);
