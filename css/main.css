@@ -7,7 +7,7 @@
     border: 4px solid #4D4D4D!important;
 }
 
-.wrapper fieldset {
+.presets {
     display: flex;
 }
 
@@ -35,7 +35,7 @@
     text-align: center;
 }
 
-.preset__option {
+.preset__option, .vacina__option {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -49,10 +49,36 @@
     margin: 0;
 }
 
-.preset__option:checked {
+.preset__option:checked, .vacina__option:checked {
     border: 4px solid black;
 }
 
 .preset__option:checked + .preset__title {
     font-weight: bold;
+}
+
+.grupos {
+    display: flex;
+    gap: 30px;
+}
+
+.grupo {
+    display: flex;
+    padding: 22px 20px;
+    flex-direction: column;
+    gap: 10px;
+    appearance: none;
+}
+
+.vacinas {
+    display: flex;
+    gap: 10px;
+}
+
+.vacina {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    position: relative;
 }

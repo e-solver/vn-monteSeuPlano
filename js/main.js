@@ -197,9 +197,14 @@ const handlePreset = (e) => {
   let formData = new FormData(e.target.form);
   let option = formData.get("preset__option");
 
-  presetEscolhido = PRESETS.filter((elem) => elem.nome == option);
+  presetEscolhido = PRESETS.filter((elem) => elem.nome == option)[0];
+  presetEscolhido && carregarItens(presetEscolhido);
 };
 
 document
   .getElementById("submit-preset")
   .addEventListener("click", handlePreset);
+
+const carregarItens = (preset) => {
+  console.log(preset);
+};
