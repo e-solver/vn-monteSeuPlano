@@ -22,7 +22,7 @@
     gap: 10px;
 }
 
-.preset__thumb {
+.preset__thumb, .vacina__thumb {
     max-width: 150px;
     height: auto;
     object-fit: cover;
@@ -59,6 +59,7 @@
 
 .grupos {
     display: flex;
+    flex-wrap: wrap;
     gap: 30px;
 }
 
@@ -81,4 +82,7 @@
     gap: 10px;
     padding: 10px;
     position: relative;
+    max-width: 125px;
+    font-size: 12px;
+    text-align: center;
 }
