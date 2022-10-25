@@ -197,7 +197,7 @@ const handlePreset = (e) => {
   let formData = new FormData(e.target.form);
   let option = formData.get("preset__option");
 
-  presetEscolhido = PRESETS.filter((elem) => elem.nome == option)[0];
+  presetEscolhido = PRESETS.find((elem) => elem.nome == option);
   presetEscolhido && carregarItens(presetEscolhido);
 };
 
@@ -210,7 +210,7 @@ const carregarItens = (preset) => {
   let html = "";
 
   preset.grupos.forEach((grupo) => {
-    let nome = !!grupo.nome ? String(grupo.nome) : String(preset.nome);
+    let nome = !!grupo.nome ? grupo.nome : preset.nome;
     let nomeId = nome.split(" ").join("");
     let arrVacinas = retornarVacinas(grupo.skus, VACINAS);
     let htmlVacinas = "";
