@@ -205,6 +205,19 @@ document
   .getElementById("submit-preset")
   .addEventListener("click", handlePreset);
 
-const carregarItens = (preset) => {
-  console.log(preset);
+const retornarVacinas = (skus, source) => {
+  let arrVacinas = [];
+  let temQuantidade = (sku) => typeof sku == "object" && !!sku[1];
+
+  skus.forEach((el) => {
+    let vacina = source.find((elem) => {
+      return temQuantidade(el) ? elem.sku == el[0] : elem.sku == el;
+    });
+
+    let quantidade = temQuantidade(el) && el[1];
+
+    arrVacinas.push({ ...vacina, quantidade });
+  });
+
+  return arrVacinas;
 };
