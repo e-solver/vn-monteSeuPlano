@@ -2,7 +2,7 @@
 
 const PRESETS = [
   {
-    nome: "Gestantes",
+    nome: "Gestante",
     thumbnail:
       "https://vacinasnet.vteximg.com.br/arquivos/ids/156756-320-320/PlanoGestanteThumb.png",
     grupos: [
