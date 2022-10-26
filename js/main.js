@@ -260,7 +260,58 @@ const carregarItens = (preset) => {
     html += htmlGrupo;
   });
 
-  return (wrapper.innerHTML = html);
+  wrapper.innerHTML = html;
+  let options = [
+    ...document.querySelectorAll(
+      "[name='vacina__option'], [name='grupo__option']"
+    ),
+  ];
+  options.forEach((option) => {
+    option.addEventListener("change", handleOption);
+  });
+};
+
+const matchIds = (idGrupo, idVacina) => {
+  return idGrupo.split("-")[1] == idVacina.split("-")[1];
+};
+
+const handleOption = (e) => {
+  if (e.target.name.split("__")[0] != "preset") {
+    let vacinasCorrespondentes = [...e.target.form].filter(
+      (el) => matchIds(e.target.id, el.id) && el.name == "vacina__option"
+    );
+    let grupoCorrespondente = [...e.target.form].find(
+      (el) => matchIds(e.target.id, el.id) && el.name == "grupo__option"
+    );
+    let vacinasSelecionadas = vacinasCorrespondentes.filter(
+      (e) => e.checked == true
+    ).length;
+
+    if (e.target.name.split("__")[0] == "grupo") {
+      if (e.target.checked) {
+        vacinasCorrespondentes.forEach((option) => (option.checked = true));
+      } else {
+        vacinasCorrespondentes.forEach((option) => (option.checked = false));
+      }
+    }
+
+    if (e.target.name.split("__")[0] == "vacina") {
+      if (
+        (e.target.checked && !grupoCorrespondente.checked) ||
+        (!e.target.checked && grupoCorrespondente.checked)
+      ) {
+        grupoCorrespondente.indeterminate = true;
+      }
+
+      if (vacinasSelecionadas == vacinasCorrespondentes.length) {
+        grupoCorrespondente.checked = true;
+        grupoCorrespondente.indeterminate = false;
+      } else if (vacinasSelecionadas == 0) {
+        grupoCorrespondente.checked = false;
+        grupoCorrespondente.indeterminate = false;
+      }
+    }
+  }
 };
 
 const retornarVacinas = (skus, source) => {
