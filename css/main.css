@@ -84,3 +84,41 @@
     font-size: 12px;
     text-align: center;
 }
+
+.ajusteQuantidade {
+    padding: 5px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.ajusteQuantidade__aumentar, .ajusteQuantidade__diminuir {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid grey;
+}
+
+.ajusteQuantidade__aumentar, .ajusteQuantidade__diminuir, .ajusteQuantidade__valor {
+    padding: 0px 10px;
+}
+
+.ajusteQuantidade__aumentar {
+    border-radius: 0 5px 5px 0;
+    border-left: 0;
+}
+
+.ajusteQuantidade__diminuir {
+    border-radius: 5px 0 0 5px;
+    border-right: 1px solid grey;
+}
+
+.ajusteQuantidade__valor {
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    height: 100%;
+}
