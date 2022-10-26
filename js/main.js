@@ -225,6 +225,21 @@ document
   .getElementById("submit-preset")
   .addEventListener("click", handlePreset);
 
+const botaoQuantidade = ({ quantidade, sku }) => {
+  let html = "";
+  let newQuantidade = quantidade;
+
+  html += `
+    <div class="ajusteQuantidade">
+      <input type="number" name="quantidade-vacina-${sku}" id="quantidade-vacina-${sku}" class="ajusteQuantidade__valor" min="1" max="${quantidade}" value=${newQuantidade}>
+      <button class="ajusteQuantidade__diminuir" id="diminuir-vacina-${sku}">-</button>
+      <button class="ajusteQuantidade__aumentar" id="aumentar-vacina-${sku}">+</button>
+    </div>
+  `;
+
+  return html;
+};
+
 const carregarItens = (preset) => {
   const wrapper = document.querySelector(".grupos");
   let html = "";
@@ -238,9 +253,14 @@ const carregarItens = (preset) => {
     arrVacinas.forEach((vacina) => {
       htmlVacinas += `
         <label for="grupo-${nomeId}-vacina-${vacina.sku}" class="vacina">
-            <input type="checkbox" name="vacina__option" id="grupo-${nomeId}-vacina-${vacina.sku}" />
-            <img class="vacina__thumb" src="${vacina.thumbnail}" alt="Ícone Vacina ${vacina.nome}" />
+            <input type="checkbox" name="vacina__option" id="grupo-${nomeId}-vacina-${
+        vacina.sku
+      }" />
+            <img class="vacina__thumb" src="${
+              vacina.thumbnail
+            }" alt="Ícone Vacina ${vacina.nome}" />
             ${vacina.nome}
+            ${vacina.quantidade > 1 ? botaoQuantidade(vacina) : ""}
         </label>
         `;
     });
@@ -269,6 +289,36 @@ const carregarItens = (preset) => {
   options.forEach((option) => {
     option.addEventListener("change", handleOption);
   });
+
+  let botoesQuantidade = [
+    ...document.querySelectorAll(
+      ".ajusteQuantidade__aumentar, .ajusteQuantidade__diminuir"
+    ),
+  ];
+
+  botoesQuantidade.forEach((botao) => {
+    botao.addEventListener("click", handleQuantidade);
+  });
+};
+
+const handleQuantidade = (e) => {
+  e.preventDefault();
+
+  let elQuantidade = [...e.target.parentElement.children].find(
+    (e) => e.name.split("-")[0] == "quantidade"
+  );
+
+  if (
+    e.target.textContent == "-" &&
+    elQuantidade.value != elQuantidade.attributes.min.value
+  ) {
+    --elQuantidade.value;
+  } else if (
+    e.target.textContent == "+" &&
+    elQuantidade.value != elQuantidade.attributes.max.value
+  ) {
+    ++elQuantidade.value;
+  }
 };
 
 const matchIds = (idGrupo, idVacina) => {
