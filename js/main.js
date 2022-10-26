@@ -190,6 +190,26 @@ const VACINAS = [
   },
 ];
 
+const carregarPresets = (presets) => {
+  const wrapper = document.querySelector(".presets");
+  let html = "";
+
+  presets.forEach(({ nome, thumbnail }) => {
+    let nomeId = nome.split(" ").join("");
+    html += `
+    <label for="preset-gestante" class="preset preset__title">
+      <img src="${thumbnail}" alt="Plano ${nome}" class="preset__thumb" />
+      <input type="radio" name="preset__option" id="preset-${nomeId}" class="preset__option" value="${nome}" />
+      ${nome}
+    </label>
+    `;
+  });
+
+  return (wrapper.innerHTML = html);
+};
+
+carregarPresets(PRESETS);
+
 let presetEscolhido;
 
 const handlePreset = (e) => {

@@ -55,10 +55,6 @@
     border: 4px solid black;
 }
 
-.preset__option:checked + .preset__title {
-    font-weight: bold;
-}
-
 .grupos {
     display: flex;
     flex-wrap: wrap;
