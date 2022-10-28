@@ -231,7 +231,7 @@ const botaoQuantidade = ({ quantidade, sku }) => {
 
   html += `
     <div class="ajusteQuantidade">
-      <input type="number" name="quantidade-vacina-${sku}" id="quantidade-vacina-${sku}" class="ajusteQuantidade__valor" min="1" max="${quantidade}" value=${newQuantidade}>
+      <input type="number" name="quantidade-vacina-${sku}" id="quantidade-vacina-${sku}" class="ajusteQuantidade__valor" min="1" max="${quantidade}" placeholder=${newQuantidade}>
       <button class="ajusteQuantidade__diminuir" id="diminuir-vacina-${sku}">-</button>
       <button class="ajusteQuantidade__aumentar" id="aumentar-vacina-${sku}">+</button>
     </div>
@@ -253,9 +253,9 @@ const carregarItens = (preset) => {
     arrVacinas.forEach((vacina) => {
       htmlVacinas += `
         <label for="grupo-${nomeId}-vacina-${vacina.sku}" class="vacina">
-            <input type="checkbox" name="vacina__option" id="grupo-${nomeId}-vacina-${
+            <input type="checkbox" name="vacina__option" value=grupo-${nomeId}-vacina-${
         vacina.sku
-      }" />
+      }  id="grupo-${nomeId}-vacina-${vacina.sku}" />
             <img class="vacina__thumb" src="${
               vacina.thumbnail
             }" alt="Ícone Vacina ${vacina.nome}" />
@@ -268,7 +268,7 @@ const carregarItens = (preset) => {
     let htmlGrupo = `
     <fieldset class="grupo">
         <label for="grupo-${nomeId}" class="grupo__option">
-        <input type="checkbox" class="grupo__option" name="grupo__option" id="grupo-${nomeId}" />
+        <input type="checkbox" class="grupo__option" name="grupo__option" value="${nome}" id="grupo-${nomeId}" />
             ${nome}
         </label>
         <div class="vacinas">
@@ -312,12 +312,12 @@ const handleQuantidade = (e) => {
     e.target.textContent == "-" &&
     elQuantidade.value != elQuantidade.attributes.min.value
   ) {
-    --elQuantidade.value;
+    elQuantidade.value = --elQuantidade.placeholder;
   } else if (
     e.target.textContent == "+" &&
     elQuantidade.value != elQuantidade.attributes.max.value
   ) {
-    ++elQuantidade.value;
+    elQuantidade.value = ++elQuantidade.placeholder;
   }
 };
 
@@ -346,6 +346,22 @@ const handleOption = (e) => {
     }
 
     if (e.target.name.split("__")[0] == "vacina") {
+      let botaoQuantidade = [...e.target.parentElement.children].find(
+        (e) => e.className == "ajusteQuantidade"
+      );
+
+      let elQuantidade = [...botaoQuantidade.children].find(
+        (e) => e.name.split("-")[0] == "quantidade"
+      );
+
+      if (e.target.checked && !!botaoQuantidade) {
+        botaoQuantidade.style.display = "inline-flex";
+        elQuantidade.value = elQuantidade.placeholder;
+      } else {
+        botaoQuantidade.style.display = "none";
+        elQuantidade.value = "";
+      }
+
       if (
         (e.target.checked && !grupoCorrespondente.checked) ||
         (!e.target.checked && grupoCorrespondente.checked)
