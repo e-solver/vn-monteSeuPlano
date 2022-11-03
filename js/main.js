@@ -335,8 +335,6 @@ const toggleVacina = (elVacina, checked) => {
   let elQuantidade =
     elBotao && elBotao.querySelector(".ajusteQuantidade__valor");
 
-  console.log(elBotao, elQuantidade);
-
   if (checked) {
     elVacina.checked = true;
     if (elBotao) {
