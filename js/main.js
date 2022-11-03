@@ -214,7 +214,7 @@ const carregarPresets = (presets) => {
     html += `
     <label for="preset-gestante" class="preset preset__title">
       <img src="${thumbnail}" alt="Plano ${nome}" class="preset__thumb" />
-      <input type="radio" name="preset__option" id="preset-${id}" class="preset__option" value="${nome}" />
+      <input type="radio" name="preset__option" id="preset-${id}" class="preset__option" value="${id}" />
       ${nome}
     </label>
     `;
@@ -232,7 +232,7 @@ const handlePreset = (e) => {
   let formData = new FormData(e.target.form);
   let option = formData.get("preset__option");
 
-  presetEscolhido = PRESETS.find((elem) => elem.nome == option);
+  presetEscolhido = PRESETS.find((elem) => elem.id == option);
   presetEscolhido && carregarItens(presetEscolhido);
 };
 
@@ -240,13 +240,14 @@ document
   .getElementById("submit-preset")
   .addEventListener("click", handlePreset);
 
-const botaoQuantidade = ({ quantidade, sku }) => {
+const botaoQuantidade = (vacina, idGrupo) => {
+  let { sku, quantidade } = vacina;
   let html = "";
   let newQuantidade = quantidade;
 
   html += `
     <div class="ajusteQuantidade">
-      <input type="number" name="quantidade-vacina-${sku}" id="quantidade-vacina-${sku}" class="ajusteQuantidade__valor" min="1" max="${quantidade}" placeholder=${newQuantidade}>
+      <input type="number" name="quantidade__${idGrupo}-${sku}" id="quantidade__${idGrupo}-${sku}" class="ajusteQuantidade__valor" min="1" max="${quantidade}" placeholder=${newQuantidade}>
       <button class="ajusteQuantidade__diminuir" id="diminuir-vacina-${sku}">-</button>
       <button class="ajusteQuantidade__aumentar" id="aumentar-vacina-${sku}">+</button>
     </div>
@@ -267,23 +268,23 @@ const carregarItens = (preset) => {
 
     arrVacinas.forEach((vacina) => {
       htmlVacinas += `
-        <label for="grupo-${nomeId}-vacina-${vacina.sku}" class="vacina">
-            <input type="checkbox" name="vacina__option" value=grupo-${nomeId}-vacina-${
+        <label for="${nomeId}-${vacina.sku}" class="vacina">
+            <input type="checkbox" name="vacina__option" value=${nomeId}-${
         vacina.sku
-      }  id="grupo-${nomeId}-vacina-${vacina.sku}" />
+      }  id="${nomeId}-${vacina.sku}" />
             <img class="vacina__thumb" src="${
               vacina.thumbnail
             }" alt="Ícone Vacina ${vacina.nome}" />
             ${vacina.nome}
-            ${vacina.quantidade > 1 ? botaoQuantidade(vacina) : ""}
+            ${vacina.quantidade > 1 ? botaoQuantidade(vacina, nomeId) : ""}
         </label>
         `;
     });
 
     let htmlGrupo = `
     <fieldset class="grupo">
-        <label for="grupo-${nomeId}" class="grupo__option">
-        <input type="checkbox" class="grupo__option" name="grupo__option" value="${nomeId}" id="grupo-${nomeId}" />
+        <label for="${nomeId}" class="grupo__option">
+        <input type="checkbox" class="grupo__option" name="grupo__option" value="${nomeId}" id="${nomeId}" />
             ${nome}
         </label>
         <div class="vacinas">
@@ -339,7 +340,7 @@ const handleQuantidade = (e) => {
 };
 
 const matchIds = (idGrupo, idVacina) => {
-  return idGrupo.split("-")[1] == idVacina.split("-")[1];
+  return idGrupo.split("-")[0] == idVacina.split("-")[0];
 };
 
 const toggleVacina = (elVacina, checked) => {
