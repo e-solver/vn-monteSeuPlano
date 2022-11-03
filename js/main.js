@@ -317,12 +317,39 @@ const handleQuantidade = (e) => {
     e.target.textContent == "+" &&
     elQuantidade.value != elQuantidade.attributes.max.value
   ) {
-    elQuantidade.value = ++elQuantidade.placeholder;
+    elQuantidade.placeholder == elQuantidade.attributes.max.value
+      ? (elQuantidade.value = elQuantidade.placeholder)
+      : (elQuantidade.value = ++elQuantidade.placeholder);
   }
 };
 
 const matchIds = (idGrupo, idVacina) => {
   return idGrupo.split("-")[1] == idVacina.split("-")[1];
+};
+
+const toggleVacina = (elVacina, checked) => {
+  let elBotao =
+    !!elVacina.parentElement.querySelector(".ajusteQuantidade") &&
+    elVacina.parentElement.querySelector(".ajusteQuantidade");
+
+  let elQuantidade =
+    elBotao && elBotao.querySelector(".ajusteQuantidade__valor");
+
+  console.log(elBotao, elQuantidade);
+
+  if (checked) {
+    elVacina.checked = true;
+    if (elBotao) {
+      elBotao.style.display = "inline-flex";
+      elQuantidade.value = elQuantidade.placeholder;
+    }
+  } else {
+    elVacina.checked = false;
+    if (elBotao) {
+      elBotao.style.display = "none";
+      elQuantidade.value = "";
+    }
+  }
 };
 
 const handleOption = (e) => {
@@ -338,29 +365,13 @@ const handleOption = (e) => {
     ).length;
 
     if (e.target.name.split("__")[0] == "grupo") {
-      if (e.target.checked) {
-        vacinasCorrespondentes.forEach((option) => (option.checked = true));
-      } else {
-        vacinasCorrespondentes.forEach((option) => (option.checked = false));
-      }
+      vacinasCorrespondentes.forEach((vacina) =>
+        toggleVacina(vacina, e.target.checked)
+      );
     }
 
     if (e.target.name.split("__")[0] == "vacina") {
-      let botaoQuantidade = [...e.target.parentElement.children].find(
-        (e) => e.className == "ajusteQuantidade"
-      );
-
-      let elQuantidade = [...botaoQuantidade.children].find(
-        (e) => e.name.split("-")[0] == "quantidade"
-      );
-
-      if (e.target.checked && !!botaoQuantidade) {
-        botaoQuantidade.style.display = "inline-flex";
-        elQuantidade.value = elQuantidade.placeholder;
-      } else {
-        botaoQuantidade.style.display = "none";
-        elQuantidade.value = "";
-      }
+      toggleVacina(e.target, e.target.checked);
 
       if (
         (e.target.checked && !grupoCorrespondente.checked) ||
