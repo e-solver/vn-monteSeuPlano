@@ -117,97 +117,97 @@ const VACINAS = [
   {
     nome: "Tríplice Bacteriana Acelular (dTpa)",
     thumbnail:
-      "https://vacinasnet.vteximg.com.br/arquivos/ids/156695-100-100/Icones-GSK-dTpa.png?v=637921056148230000",
+      "https://vacinasnet.vteximg.com.br/arquivos/ids/156695-320-320/Icones-GSK-dTpa.png?v=637921056148230000",
     sku: 236,
   },
   {
     nome: "Gripe Quadrivalente Infantil e Adulto",
     thumbnail:
-      "https://vacinasnet.vteximg.com.br/arquivos/ids/156699-100-100/Icones-GSK-Gripe.png?v=637921056612900000",
+      "https://vacinasnet.vteximg.com.br/arquivos/ids/156699-320-320/Icones-GSK-Gripe.png?v=637921056612900000",
     sku: 282,
   },
   {
     nome: "Hepatite B Adulto",
     thumbnail:
-      "https://vacinasnet.vteximg.com.br/arquivos/ids/156697-100-100/Icones-GSK-HepB-Adt.png?v=637921056385470000",
+      "https://vacinasnet.vteximg.com.br/arquivos/ids/156697-320-320/Icones-GSK-HepB-Adt.png?v=637921056385470000",
     sku: 269,
   },
   {
     nome: "Hexavalente (DTPa-VIP-Hib-HepB)",
     thumbnail:
-      "https://vacinasnet.vteximg.com.br/arquivos/ids/156704-100-100/Icones-GSK-Hexa.png?v=637921062641170000",
+      "https://vacinasnet.vteximg.com.br/arquivos/ids/156704-320-320/Icones-GSK-Hexa.png?v=637921062641170000",
     sku: 261,
   },
   {
     nome: "Pneumocócica Conjugada 13-Valente",
     thumbnail:
-      "https://vacinasnet.vteximg.com.br/arquivos/ids/156567-100-100/ic.-VPC.13-PFIZER.jpg?v=637440787281770000",
+      "https://vacinasnet.vteximg.com.br/arquivos/ids/156567-320-320/ic.-VPC.13-PFIZER.jpg?v=637440787281770000",
     sku: 249,
   },
   {
     nome: "Rotavírus Humano Pentavalente",
     thumbnail:
-      "https://vacinasnet.vteximg.com.br/arquivos/ids/156565-100-100/ic.-Rota.5V-MSD.jpg?v=637440784296800000",
+      "https://vacinasnet.vteximg.com.br/arquivos/ids/156565-320-320/ic.-Rota.5V-MSD.jpg?v=637440784296800000",
     sku: 245,
   },
   {
     nome: "Meningocócica ACWY",
     thumbnail:
-      "https://vacinasnet.vteximg.com.br/arquivos/ids/156696-100-100/Icones-GSK-ACWY.png?v=637921056326600000",
+      "https://vacinasnet.vteximg.com.br/arquivos/ids/156696-320-320/Icones-GSK-ACWY.png?v=637921056326600000",
     sku: 257,
   },
   {
     nome: "Meningocócica B Recombinante",
     thumbnail:
-      "https://vacinasnet.vteximg.com.br/arquivos/ids/156703-100-100/Icones-GSK-MeningoB.png?v=637921062383000000",
+      "https://vacinasnet.vteximg.com.br/arquivos/ids/156703-320-320/Icones-GSK-MeningoB.png?v=637921062383000000",
     sku: 255,
   },
   {
     nome: "Tríplice Viral (SCR)",
     thumbnail:
-      "https://vacinasnet.vteximg.com.br/arquivos/ids/156556-100-100/ic.-Triplice.Viral-MSD.jpg?v=637440776082770000",
+      "https://vacinasnet.vteximg.com.br/arquivos/ids/156556-320-320/ic.-Triplice.Viral-MSD.jpg?v=637440776082770000",
     sku: 235,
   },
   {
     nome: "Hepatite A Infantil",
     thumbnail:
-      "https://vacinasnet.vteximg.com.br/arquivos/ids/156584-100-100/ic.-Hep.A.Inf-MSD.jpg?v=637440799246030000",
+      "https://vacinasnet.vteximg.com.br/arquivos/ids/156584-320-320/ic.-Hep.A.Inf-MSD.jpg?v=637440799246030000",
     sku: 271,
   },
   {
     nome: "Pentavalente (DTPa-VIP-Hib)",
     thumbnail:
-      "https://vacinasnet.vteximg.com.br/arquivos/ids/156692-100-100/Icones-GSK-Penta.png?v=637921055813830000",
+      "https://vacinasnet.vteximg.com.br/arquivos/ids/156692-320-320/Icones-GSK-Penta.png?v=637921055813830000",
     sku: 252,
   },
   {
     nome: "Varicela (Catapora)",
     thumbnail:
-      "https://vacinasnet.vteximg.com.br/arquivos/ids/156553-100-100/ic.-Catapora-MSD.jpg?v=637440773621900000",
+      "https://vacinasnet.vteximg.com.br/arquivos/ids/156553-320-320/ic.-Catapora-MSD.jpg?v=637440773621900000",
     sku: 231,
   },
   {
     nome: "HPV Quadrivalente",
     thumbnail:
-      "https://vacinasnet.vteximg.com.br/arquivos/ids/156572-100-100/ic.-HPV.4V-MSD.jpg?v=637440792276600000",
+      "https://vacinasnet.vteximg.com.br/arquivos/ids/156572-320-320/ic.-HPV.4V-MSD.jpg?v=637440792276600000",
     sku: 259,
   },
   {
     nome: "Hepatite A+B",
     thumbnail:
-      "https://vacinasnet.vteximg.com.br/arquivos/ids/156690-100-100/Icones-GSK---Hep-A-B.png?v=637921054017670000",
+      "https://vacinasnet.vteximg.com.br/arquivos/ids/156690-320-320/Icones-GSK---Hep-A-B.png?v=637921054017670000",
     sku: 270,
   },
   {
     nome: "Herpes Zóster Recombinante",
     thumbnail:
-      "https://vacinasnet.vteximg.com.br/arquivos/ids/156705-100-100/Icones-GSK-HerpesZoster.png?v=637921063766900000",
+      "https://vacinasnet.vteximg.com.br/arquivos/ids/156705-320-320/Icones-GSK-HerpesZoster.png?v=637921063766900000",
     sku: 301,
   },
   {
     nome: "Febre Amarela",
     thumbnail:
-      "https://vacinasnet.vteximg.com.br/arquivos/ids/156748-100-100/Febre-Amarela.png?v=637934943289100000",
+      "https://vacinasnet.vteximg.com.br/arquivos/ids/156748-320-320/Febre-Amarela.png?v=637934943289100000",
     sku: 284,
   },
 ];
