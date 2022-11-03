@@ -2,6 +2,7 @@
 
 const PRESETS = [
   {
+    id: "gestante",
     nome: "Gestante",
     thumbnail:
       "https://vacinasnet.vteximg.com.br/arquivos/ids/156756-320-320/PlanoGestanteThumb.png",
@@ -12,64 +13,78 @@ const PRESETS = [
     ],
   },
   {
+    id: "2a9meses",
     nome: "2 a 9 meses",
     thumbnail:
       "https://vacinasnet.vteximg.com.br/arquivos/ids/156758-320-320/Plano-Herois2.png?v=637951574533370000",
     grupos: [
       {
+        id: "2meses",
         nome: "2 meses",
         skus: [261, 249, 245],
       },
       {
+        id: "3meses",
         nome: "3 meses",
         skus: [257, 255],
       },
       {
+        id: "4meses",
         nome: "4 meses",
         skus: [261, 249, 245],
       },
       {
+        id: "5meses",
         nome: "5 meses",
         skus: [257, 255],
       },
       {
+        id: "6meses",
         nome: "6 meses",
         skus: [261, 249, 245, 282],
       },
       {
+        id: "7meses",
         nome: "7 meses",
         skus: [282],
       },
       {
+        id: "9meses",
         nome: "9 meses",
         skus: [284],
       },
     ],
   },
   {
+    id: "12a18meses",
     nome: "12 a 18 meses",
     thumbnail:
       "https://vacinasnet.vteximg.com.br/arquivos/ids/156765-320-320/Plano-herois-3.png?v=637951603838200000",
     grupos: [
       {
+        id: "12meses",
         nome: "12 meses",
         skus: [235, 231, 271, 249],
       },
       {
+        id: "13ou14meses",
         nome: "13 ou 14 meses",
         skus: [257, 255],
       },
       {
+        id: "15meses",
         nome: "15 meses",
         skus: [235, 231, 252],
       },
       {
+        id: "18meses",
         nome: "18 meses",
         skus: [271],
       },
     ],
   },
   {
+    id: "15a49anos",
     nome: "15 a 49 anos",
     thumbnail:
       "https://vacinasnet.vteximg.com.br/arquivos/ids/156771-320-320/PlanoVacinaemDia.png?v=637951611308470000",
@@ -80,6 +95,7 @@ const PRESETS = [
     ],
   },
   {
+    id: "50+anos",
     nome: "50+ anos",
     thumbnail:
       "https://vacinasnet.vteximg.com.br/arquivos/ids/156769-320-320/PlanoSenior.png?v=637951605753600000",
@@ -194,12 +210,11 @@ const carregarPresets = (presets) => {
   const wrapper = document.querySelector(".presets");
   let html = "";
 
-  presets.forEach(({ nome, thumbnail }) => {
-    let nomeId = nome.split(" ").join("");
+  presets.forEach(({ nome, id, thumbnail }) => {
     html += `
     <label for="preset-gestante" class="preset preset__title">
       <img src="${thumbnail}" alt="Plano ${nome}" class="preset__thumb" />
-      <input type="radio" name="preset__option" id="preset-${nomeId}" class="preset__option" value="${nome}" />
+      <input type="radio" name="preset__option" id="preset-${id}" class="preset__option" value="${nome}" />
       ${nome}
     </label>
     `;
@@ -246,7 +261,7 @@ const carregarItens = (preset) => {
 
   preset.grupos.forEach((grupo) => {
     let nome = !!grupo.nome ? grupo.nome : preset.nome;
-    let nomeId = nome.split(" ").join("");
+    let nomeId = !!grupo.id ? grupo.id : preset.id;
     let arrVacinas = retornarVacinas(grupo.skus, VACINAS);
     let htmlVacinas = "";
 
@@ -268,7 +283,7 @@ const carregarItens = (preset) => {
     let htmlGrupo = `
     <fieldset class="grupo">
         <label for="grupo-${nomeId}" class="grupo__option">
-        <input type="checkbox" class="grupo__option" name="grupo__option" value="${nome}" id="grupo-${nomeId}" />
+        <input type="checkbox" class="grupo__option" name="grupo__option" value="${nomeId}" id="grupo-${nomeId}" />
             ${nome}
         </label>
         <div class="vacinas">
