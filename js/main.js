@@ -8,6 +8,8 @@ const PRESETS = [
       "https://vacinasnet.vteximg.com.br/arquivos/ids/156756-320-320/PlanoGestanteThumb.png",
     grupos: [
       {
+        id: "gestante",
+        nome: "Gestante",
         skus: [236, 282, [269, 3]],
       },
     ],
@@ -90,6 +92,8 @@ const PRESETS = [
       "https://vacinasnet.vteximg.com.br/arquivos/ids/156771-320-320/PlanoVacinaemDia.png?v=637951611308470000",
     grupos: [
       {
+        id: "15a49anos",
+        nome: "15 a 49 anos",
         skus: [257, [231, 2], [270, 3], 259, 236, [255, 2]],
       },
     ],
@@ -101,6 +105,8 @@ const PRESETS = [
       "https://vacinasnet.vteximg.com.br/arquivos/ids/156769-320-320/PlanoSenior.png?v=637951605753600000",
     grupos: [
       {
+        id: "50+anos",
+        nome: "50+ anos",
         skus: [[301, 2], 249, [270, 3], 236, 282],
       },
     ],
@@ -261,31 +267,29 @@ const carregarItens = (preset) => {
   let html = "";
 
   preset.grupos.forEach((grupo) => {
-    let nome = !!grupo.nome ? grupo.nome : preset.nome;
-    let nomeId = !!grupo.id ? grupo.id : preset.id;
     let arrVacinas = retornarVacinas(grupo.skus, VACINAS);
     let htmlVacinas = "";
 
     arrVacinas.forEach((vacina) => {
       htmlVacinas += `
-        <label for="${nomeId}-${vacina.sku}" class="vacina">
-            <input type="checkbox" name="vacina__option" value=${nomeId}-${
+        <label for="${grupo.id}-${vacina.sku}" class="vacina">
+            <input type="checkbox" name="vacina__option" value=${grupo.id}-${
         vacina.sku
-      }  id="${nomeId}-${vacina.sku}" />
+      }  id="${grupo.id}-${vacina.sku}" />
             <img class="vacina__thumb" src="${
               vacina.thumbnail
             }" alt="Ícone Vacina ${vacina.nome}" />
             ${vacina.nome}
-            ${vacina.quantidade > 1 ? botaoQuantidade(vacina, nomeId) : ""}
+            ${vacina.quantidade > 1 ? botaoQuantidade(vacina, grupo.id) : ""}
         </label>
         `;
     });
 
     let htmlGrupo = `
     <fieldset class="grupo">
-        <label for="${nomeId}" class="grupo__option">
-        <input type="checkbox" class="grupo__option" name="grupo__option" value="${nomeId}" id="${nomeId}" />
-            ${nome}
+        <label for="${grupo.id}" class="grupo__option">
+        <input type="checkbox" class="grupo__option" name="grupo__option" value="${grupo.id}" id="${grupo.id}" />
+            ${grupo.nome}
         </label>
         <div class="vacinas">
             ${htmlVacinas}
