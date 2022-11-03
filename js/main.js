@@ -304,8 +304,8 @@ const carregarItens = (preset) => {
 const handleQuantidade = (e) => {
   e.preventDefault();
 
-  let elQuantidade = [...e.target.parentElement.children].find(
-    (e) => e.name.split("-")[0] == "quantidade"
+  let elQuantidade = e.target.parentElement.querySelector(
+    ".ajusteQuantidade__valor"
   );
 
   if (
