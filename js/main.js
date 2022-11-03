@@ -232,6 +232,7 @@ const carregarPresets = (presets) => {
 carregarPresets(PRESETS);
 
 let presetEscolhido;
+let itensEscolhidos;
 
 const handlePreset = (e) => {
   e.preventDefault();
@@ -239,6 +240,7 @@ const handlePreset = (e) => {
   let option = formData.get("preset__option");
 
   presetEscolhido = PRESETS.find((elem) => elem.id == option);
+  itensEscolhidos = { ...presetEscolhido, grupos: [] };
   presetEscolhido && carregarItens(presetEscolhido);
 };
 
@@ -425,3 +427,53 @@ const retornarVacinas = (skus, source) => {
 
   return arrVacinas;
 };
+
+const handleItens = (e) => {
+  e.preventDefault();
+  let formData = new FormData(e.target.form);
+
+  let preset = PRESETS.find((e) => e.id == itensEscolhidos.id);
+  let customPreset = itensEscolhidos;
+
+  for (const [option, valor] of formData) {
+    let tipo = option.split("__")[0];
+
+    if (tipo == "grupo") {
+      const grupoPreset = preset.grupos.find((e) => e.id == valor);
+      !customPreset.grupos && customPreset.grupos.push(grupoPreset);
+    }
+
+    if (tipo == "vacina") {
+      let [grupo, sku] = valor.split("-");
+      const grupoPreset = preset.grupos.find((e) => e.id == grupo);
+
+      let grupoExistente = () => customPreset.grupos.find((e) => e.id == grupo);
+
+      const vacinaExistente =
+        !!grupoExistente() &&
+        grupoExistente().skus.find((e) => e == sku || e[0] == sku);
+
+      if (!grupoExistente()) {
+        customPreset.grupos.push({ ...grupoPreset, skus: [] });
+        grupoExistente().skus.push(sku);
+      } else if (!vacinaExistente) {
+        grupoExistente().skus.push(sku);
+      }
+    }
+
+    if (tipo == "quantidade" && !!valor) {
+      let vacina = option.split("__")[1];
+      let [grupo, sku] = vacina.split("-");
+
+      customPreset.grupos.forEach((e) => {
+        if (e.id == grupo) {
+          e.skus = e.skus.map((el) =>
+            el == sku || el[0] == sku ? [sku, valor] : el
+          );
+        }
+      });
+    }
+  }
+};
+
+document.getElementById("submit-itens").addEventListener("click", handleItens);
