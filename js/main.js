@@ -287,13 +287,7 @@ const carregarItens = (preset, wrapper, type) => {
       if (type == "sumario") {
         htmlGrupo = `
           <div class="sumario__grupo">
-            ${
-              grupo.id == "2a9meses" || grupo.id == "12a18meses"
-                ? `<span class="sumario__titulo sumario__titulo--meses"><b>${
-                    grupo.nome.split(" ")[0]
-                  }</b><span>${grupo.nome.split(" ")[1]}</span></span>`
-                : `<span class="sumario__titulo"><b>${grupo.nome}</b></span>`
-            }
+            <span class="sumario__titulo"><b>${grupo.nome}</b></span>
             <ul class="sumario__lista">
               ${htmlVacinas}
             </ul>
