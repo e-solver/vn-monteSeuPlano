@@ -511,4 +511,42 @@ const handleItens = (e) => {
   carregarItens(customPreset, document.querySelector(".sumario"), "sumario");
 };
 
+const criarCarrinho = (
+  itens,
+  urlLoja = "https://vacinasnet.myvtex.com/",
+  seller = "1",
+  sc = "1"
+) => {
+  let skus = [].concat(...itens.grupos.map((e) => e.skus));
+  let skusObj = [];
+
+  skus.forEach((e) => {
+    let sku = typeof e == "object" ? e[0] : e;
+    let qty = typeof e == "object" ? e[1] : 1;
+    let skuEncontrado = skusObj.find((el) => el.sku == sku);
+
+    if (!!skuEncontrado) {
+      ++skuEncontrado.qty;
+    } else {
+      skusObj.push({ sku, qty, seller });
+    }
+  });
+
+  let skusString = "";
+
+  skusObj.forEach((sku) => {
+    for (const [chave, valor] of Object.entries(sku)) {
+      skusString += `&${chave}=${valor}`;
+    }
+  });
+
+  return `${urlLoja}checkout/cart/add?sc=${(sc, skusString)}`;
+};
+
+const enviarPlano = (e) => {
+  e.preventDefault();
+  criarCarrinho(itensEscolhidos);
+};
+
 document.getElementById("submit-itens").addEventListener("click", handleItens);
+document.getElementById("submit-plano").addEventListener("click", enviarPlano);
