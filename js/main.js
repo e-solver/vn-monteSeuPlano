@@ -229,6 +229,10 @@ const retornarVacinas = (skus, source) => {
   return arrVacinas;
 };
 
+const matchIds = (idGrupo, idVacina) => {
+  return idGrupo.split("-")[0] == idVacina.split("-")[0];
+};
+
 const carregarItens = (preset, wrapper, type) => {
   let html = "";
 
@@ -400,10 +404,6 @@ const handleQuantidade = (e) => {
   }
 };
 
-const matchIds = (idGrupo, idVacina) => {
-  return idGrupo.split("-")[0] == idVacina.split("-")[0];
-};
-
 const toggleVacina = (elVacina, checked) => {
   let elBotao =
     !!elVacina.parentElement.querySelector(".ajusteQuantidade") &&
@@ -472,6 +472,7 @@ const handleItens = (e) => {
 
   let preset = PRESETS.find((e) => e.id == itensEscolhidos.id);
   let customPreset = itensEscolhidos;
+  customPreset.grupos = [];
 
   for (const [option, valor] of formData) {
     let tipo = option.split("__")[0];
