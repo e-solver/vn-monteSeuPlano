@@ -134,3 +134,51 @@ input[type=number] {
     font-size: 14px;
     height: 100%;
 }
+
+#etapa-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.sumario__vacina, .sumario__lista, .sumario__titulo {
+    display: flex;
+}
+
+.sumario {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    justify-content:space-around;
+}
+
+.sumario__grupo {
+    padding: 20px;
+    border-radius: 20px;
+    width: 100%;
+}
+
+.sumario__titulo {
+    align-items: center;
+    width: 100%;
+    font-size: 18px;
+    text-align: center;
+}
+
+.sumario__lista {
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+    padding: unset;
+}
+
+.sumario__thumbnail {
+    max-width: 28px;
+    height: 28px;
+    border-radius: 5px;
+}
+
+.sumario__vacina {
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+}
