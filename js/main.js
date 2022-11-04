@@ -212,24 +212,133 @@ const VACINAS = [
   },
 ];
 
-const carregarPresets = (presets) => {
-  const wrapper = document.querySelector(".presets");
-  let html = "";
+const retornarVacinas = (skus, source) => {
+  let arrVacinas = [];
+  let temQuantidade = (sku) => typeof sku == "object" && !!sku[1];
 
-  presets.forEach(({ nome, id, thumbnail }) => {
-    html += `
-    <label for="preset-gestante" class="preset preset__title">
-      <img src="${thumbnail}" alt="Plano ${nome}" class="preset__thumb" />
-      <input type="radio" name="preset__option" id="preset-${id}" class="preset__option" value="${id}" />
-      ${nome}
-    </label>
-    `;
+  skus.forEach((el) => {
+    let vacina = source.find((elem) => {
+      return temQuantidade(el) ? elem.sku == el[0] : elem.sku == el;
+    });
+
+    let quantidade = temQuantidade(el) ? el[1] : 1;
+
+    arrVacinas.push({ ...vacina, quantidade });
   });
 
-  return (wrapper.innerHTML = html);
+  return arrVacinas;
 };
 
-carregarPresets(PRESETS);
+const carregarItens = (preset, wrapper, type) => {
+  let html = "";
+
+  if (type !== "preset") {
+    preset.grupos.forEach((grupo) => {
+      let arrVacinas = retornarVacinas(grupo.skus, VACINAS);
+      let htmlVacinas = "";
+
+      arrVacinas.forEach((vacina) => {
+        if (type == "selecao") {
+          htmlVacinas += `
+          <label for="${grupo.id}-${
+            vacina.sku
+          }" class="vacina"><input type="checkbox" name="vacina__option" value=${
+            grupo.id
+          }-${vacina.sku}  id="${grupo.id}-${
+            vacina.sku
+          }" /><img class="vacina__thumb" src="${
+            vacina.thumbnail
+          }" alt="Ícone {vacina.nome}" />${vacina.nome}${
+            vacina.quantidade > 1 ? botaoQuantidade(vacina, grupo.id) : ""
+          }</label>`;
+        }
+
+        if (type == "sumario") {
+          htmlVacinas += `
+            <li class="sumario__vacina">
+              <img class="sumario__thumbnail" src="${vacina.thumbnail}" />
+              ${
+                vacina.quantidade > 1
+                  ? "<small>" + vacina.quantidade + "x</small> -"
+                  : ""
+              } ${vacina.nome}
+            </li>
+          `;
+        }
+      });
+
+      let htmlGrupo = "";
+
+      if (type == "selecao") {
+        htmlGrupo = `
+        <fieldset class="grupo">
+          <label for="${grupo.id}" class="grupo__option">
+          <input type="checkbox" class="grupo__option" name="grupo__option" value="${grupo.id}" id="${grupo.id}" />
+          ${grupo.nome}
+          </label>
+          <div class="vacinas">${htmlVacinas}</div>
+        </fieldset>`;
+      }
+
+      if (type == "sumario") {
+        htmlGrupo = `
+          <div class="sumario__grupo">
+            ${
+              grupo.id == "2a9meses" || grupo.id == "12a18meses"
+                ? `<span class="sumario__titulo sumario__titulo--meses"><b>${
+                    grupo.nome.split(" ")[0]
+                  }</b><span>${grupo.nome.split(" ")[1]}</span></span>`
+                : `<span class="sumario__titulo"><b>${grupo.nome}</b></span>`
+            }
+            <ul class="sumario__lista">
+              ${htmlVacinas}
+            </ul>
+          </div>
+        `;
+      }
+
+      html += htmlGrupo;
+    });
+  }
+
+  if (type == "preset") {
+    preset.forEach((preset) => {
+      htmlGrupo = `
+    <label for="preset-gestante" class="preset preset__title">
+      <img src="${preset.thumbnail}" alt="Plano ${preset.nome}" class="preset__thumb" />
+      <input type="radio" name="preset__option" id="preset-${preset.id}" class="preset__option" value="${preset.id}" />
+      ${preset.nome}
+    </label>
+    `;
+      html += htmlGrupo;
+    });
+  }
+
+  wrapper.innerHTML = html;
+
+  if (type == "selecao") {
+    let options = [
+      ...document.querySelectorAll(
+        "[name='vacina__option'], [name='grupo__option']"
+      ),
+    ];
+    options.forEach((option) => {
+      option.addEventListener("change", handleOption);
+    });
+
+    let botoesQuantidade = [
+      ...document.querySelectorAll(
+        ".ajusteQuantidade__aumentar, .ajusteQuantidade__diminuir"
+      ),
+    ];
+
+    botoesQuantidade.forEach((botao) => {
+      botao.addEventListener("click", handleQuantidade);
+    });
+  }
+};
+
+carregarItens(PRESETS, document.querySelector(".presets"), "preset");
 
 let presetEscolhido;
 let itensEscolhidos;
@@ -267,100 +376,6 @@ const botaoQuantidade = (vacina, idGrupo) => {
   `;
 
   return html;
-};
-
-const carregarItens = (preset, wrapper, type) => {
-  let html = "";
-
-  preset.grupos.forEach((grupo) => {
-    let arrVacinas = retornarVacinas(grupo.skus, VACINAS);
-    let htmlVacinas = "";
-
-    arrVacinas.forEach((vacina) => {
-      if (type == "selecao") {
-        htmlVacinas += `
-        <label for="${grupo.id}-${
-          vacina.sku
-        }" class="vacina"><input type="checkbox" name="vacina__option" value=${
-          grupo.id
-        }-${vacina.sku}  id="${grupo.id}-${
-          vacina.sku
-        }" /><img class="vacina__thumb" src="${
-          vacina.thumbnail
-        }" alt="Ícone {vacina.nome}" />${vacina.nome}${
-          vacina.quantidade > 1 ? botaoQuantidade(vacina, grupo.id) : ""
-        }</label>`;
-      }
-
-      if (type == "sumario") {
-        htmlVacinas += `
-          <li class="sumario__vacina">
-            <img class="sumario__thumbnail" src="${vacina.thumbnail}" />
-            ${
-              vacina.quantidade > 1
-                ? "<small>" + vacina.quantidade + "x</small> -"
-                : ""
-            } ${vacina.nome}
-          </li>
-        `;
-      }
-    });
-
-    let htmlGrupo = "";
-
-    if (type == "selecao") {
-      htmlGrupo = `
-      <fieldset class="grupo">
-        <label for="${grupo.id}" class="grupo__option">
-        <input type="checkbox" class="grupo__option" name="grupo__option" value="${grupo.id}" id="${grupo.id}" />
-        ${grupo.nome}
-        </label>
-        <div class="vacinas">${htmlVacinas}</div>
-      </fieldset>`;
-    }
-
-    if (type == "sumario") {
-      htmlGrupo = `
-        <div class="sumario__grupo">
-          ${
-            grupo.id == "2a9meses" || grupo.id == "12a18meses"
-              ? `<span class="sumario__titulo sumario__titulo--meses"><b>${
-                  grupo.nome.split(" ")[0]
-                }</b><span>${grupo.nome.split(" ")[1]}</span></span>`
-              : `<span class="sumario__titulo"><b>${grupo.nome}</b></span>`
-          }
-          <ul class="sumario__lista">
-            ${htmlVacinas}
-          </ul>
-        </div>
-      `;
-    }
-
-    html += htmlGrupo;
-  });
-
-  wrapper.innerHTML = html;
-
-  if (type == "selecao") {
-    let options = [
-      ...document.querySelectorAll(
-        "[name='vacina__option'], [name='grupo__option']"
-      ),
-    ];
-    options.forEach((option) => {
-      option.addEventListener("change", handleOption);
-    });
-
-    let botoesQuantidade = [
-      ...document.querySelectorAll(
-        ".ajusteQuantidade__aumentar, .ajusteQuantidade__diminuir"
-      ),
-    ];
-
-    botoesQuantidade.forEach((botao) => {
-      botao.addEventListener("click", handleQuantidade);
-    });
-  }
 };
 
 const handleQuantidade = (e) => {
@@ -449,23 +464,6 @@ const handleOption = (e) => {
       }
     }
   }
-};
-
-const retornarVacinas = (skus, source) => {
-  let arrVacinas = [];
-  let temQuantidade = (sku) => typeof sku == "object" && !!sku[1];
-
-  skus.forEach((el) => {
-    let vacina = source.find((elem) => {
-      return temQuantidade(el) ? elem.sku == el[0] : elem.sku == el;
-    });
-
-    let quantidade = temQuantidade(el) ? el[1] : 1;
-
-    arrVacinas.push({ ...vacina, quantidade });
-  });
-
-  return arrVacinas;
 };
 
 const handleItens = (e) => {
