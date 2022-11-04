@@ -514,7 +514,7 @@ const handleItens = (e) => {
     }
   }
 
-  carregarItens(customPreset, document.querySelector(".plano"), "sumario");
+  carregarItens(customPreset, document.querySelector(".sumario"), "sumario");
 };
 
 document.getElementById("submit-itens").addEventListener("click", handleItens);
