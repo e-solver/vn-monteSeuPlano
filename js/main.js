@@ -543,9 +543,36 @@ const criarCarrinho = (
   return `${urlLoja}checkout/cart/add?sc=${(sc, skusString)}`;
 };
 
+const criarLink = (
+  itens,
+  vacinas,
+  numero = "5511933930901",
+  preMsg = "Vacinas escolhidas: ",
+  postMsg = "Gostaria de saber o valor de meu plano personalizado."
+) => {
+  let strVacinas = "";
+  let strCarrinho = "*Link do meu carrinho:* " + criarCarrinho(itens) + "\n\n";
+
+  itens.grupos.forEach((grupo) => {
+    let arrVacinas = grupo.skus.map((e) => {
+      let sku = typeof e == "object" ? [e] : [[e]];
+      let [vacina] = retornarVacinas(sku, vacinas);
+
+      return `• ${
+        vacina.quantidade > 1 ? "_" + vacina.quantidade + "x" + "_" : ""
+      } *${vacina.nome}*`;
+    });
+    strVacinas += `- ${grupo.nome}\n${arrVacinas.join("\n")}\n\n`;
+  });
+
+  let text = `${preMsg}\n\n${strVacinas}${strCarrinho}${postMsg}`;
+
+  return `https://wa.me/${numero}?text=${encodeURIComponent(text)}`;
+};
+
 const enviarPlano = (e) => {
   e.preventDefault();
-  criarCarrinho(itensEscolhidos);
+  window.open(criarLink(itensEscolhidos, VACINAS), "_blank");
 };
 
 document.getElementById("submit-itens").addEventListener("click", handleItens);
