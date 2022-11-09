@@ -575,19 +575,37 @@ const enviarPlano = (e) => {
   window.open(criarLink(itensEscolhidos, VACINAS), "_blank");
 };
 
+const validarForm = (form) => {
+  let formData = [...new FormData(form)];
+  let elLog = form.querySelector(".log");
+
+  if (!formData[0]) {
+    elLog.style.display = "flex";
+    elLog.innerHTML = "Selecione pelo menos uma das opções";
+    return false;
+  } else {
+    elLog.style.display = "none";
+    elLog.innerHTML = "";
+    return true;
+  }
+};
+
 const handleEtapa = (e) => {
   e.preventDefault();
+
   let elEtapa = e.target.closest("form");
   let etapa = elEtapa.id.split("-")[1];
   let elEtapaAnterior;
   let elEtapaAtual;
 
   if (e.target.className == "proxima-etapa" && etapa != 3) {
-    elEtapaAtual = document.getElementById(`etapa-${++etapa}`);
-    elEtapaAnterior = elEtapa;
+    if (validarForm(e.target.form)) {
+      elEtapaAtual = document.getElementById(`etapa-${++etapa}`);
+      elEtapaAnterior = elEtapa;
 
-    elEtapaAnterior.style.display = "none";
-    elEtapaAtual.style.display = "flex";
+      elEtapaAnterior.style.display = "none";
+      elEtapaAtual.style.display = "flex";
+    }
   } else if (e.target.className == "etapa-anterior") {
     elEtapaAtual = elEtapa;
     elEtapaAnterior = document.getElementById(`etapa-${--etapa}`);
