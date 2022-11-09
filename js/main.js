@@ -575,5 +575,31 @@ const enviarPlano = (e) => {
   window.open(criarLink(itensEscolhidos, VACINAS), "_blank");
 };
 
+const handleEtapa = (e) => {
+  e.preventDefault();
+  let elEtapa = e.target.closest("form");
+  let etapa = elEtapa.id.split("-")[1];
+  let elEtapaAnterior;
+  let elEtapaAtual;
+
+  if (e.target.className == "proxima-etapa" && etapa != 3) {
+    elEtapaAtual = document.getElementById(`etapa-${++etapa}`);
+    elEtapaAnterior = elEtapa;
+
+    elEtapaAnterior.style.display = "none";
+    elEtapaAtual.style.display = "flex";
+  } else if (e.target.className == "etapa-anterior") {
+    elEtapaAtual = elEtapa;
+    elEtapaAnterior = document.getElementById(`etapa-${--etapa}`);
+
+    elEtapaAtual.style.display = "none";
+    elEtapaAnterior.style.display = "flex";
+  }
+};
+
 document.getElementById("submit-itens").addEventListener("click", handleItens);
 document.getElementById("submit-plano").addEventListener("click", enviarPlano);
+
+document
+  .querySelectorAll(".proxima-etapa, .etapa-anterior")
+  .forEach((e) => e.addEventListener("click", handleEtapa));
