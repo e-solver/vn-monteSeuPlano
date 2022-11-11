@@ -225,3 +225,34 @@ form {
     margin: 0 auto;
     gap: 20px;
 }
+
+
+.proxima-etapa {
+    background-color: #9F39A5;
+    cursor: pointer;
+    border: unset;
+    padding: 12px 18px;
+    color: white;
+    font-weight: 700;
+    text-transform: lowercase;
+    font-size: 17px;
+    border-radius: 10px;
+}
+
+.proxima-etapa:active {
+    box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px;
+}
+
+.etapa-anterior {
+    font-size: 17px;
+    text-decoration: underline;
+    background: unset;
+    border: unset;
+    color: hsl(0, 0%, 20%);
+    cursor: pointer;
+}
+
+.botoes {
+    display: flex;
+    gap: 20px;
+}
