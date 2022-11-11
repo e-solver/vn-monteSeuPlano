@@ -17,12 +17,10 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-.active {
-    border: 4px solid #4D4D4D!important;
-}
-
 .presets {
     display: flex;
+    padding: 30px;
+    gap: 10px;
 }
 
 .preset {
@@ -32,7 +30,6 @@ input[type=number] {
     position: relative;
     border-radius: 15px;
     padding: 20px;
-    border: 4px solid transparent;
     gap: 10px;
 }
 
@@ -47,6 +44,8 @@ input[type=number] {
 .preset__title {
     font-size: 18px;
     text-align: center;
+    font-weight: 500;
+    color: hsl(0, 0%, 20%)
 }
 
 .preset__option, .vacina__option {
@@ -61,10 +60,32 @@ input[type=number] {
     appearance: none;
     border-radius: 15px;
     margin: 0;
+    transition: .2s;
+    box-shadow: none;
 }
 
 .preset__option:checked, .vacina__option:checked {
-    border: 4px solid black;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    transition: .2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preset__option:checked:after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: '\f00c';
+    font-size: 26px;
+    width: 48px;
+    height: 48px;
+    justify-content: center;
+    margin-bottom: 30px;
+    align-items: center;
+    color: #9F39A5;
+    background-color: white;
+    display: flex;
+    border-radius: 50px;
 }
 
 .grupos {
@@ -192,7 +213,6 @@ input[type=number] {
 
 form > fieldset {
     border: unset;
-    background-color: hsl(0, 90%, 100%);
     display: flex;
     justify-content: center;
     margin: 0 auto;
@@ -203,4 +223,5 @@ form {
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
+    gap: 20px;
 }
