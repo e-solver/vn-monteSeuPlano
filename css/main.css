@@ -72,7 +72,7 @@ input[type=number] {
     box-shadow: none;
 }
 
-.preset__option:checked, .vacina__option:checked {
+[name="preset__option"]:checked, [name="vacina__option"]:checked {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     transition: .2s;
     display: flex;
@@ -138,7 +138,7 @@ input[name="vacina__option"] {
     position: absolute;
     top: 20px;
     right: 15px;
-    transform: scale(1.6);
+    transform: scale(1.7);
 }
 
 .vacina {
@@ -203,15 +203,20 @@ input[name="vacina__option"] {
 
 .sumario {
     display: grid;
-    grid-gap: 10px;
     grid-template-columns: 1fr 1fr;
-    justify-content:space-around;
+    gap: 10px;
+    justify-content:stretch;
+    background-color: #9F39A5;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 .sumario__grupo {
-    padding: 10px;
+    padding: 15px;
     border-radius: 20px;
     width: 100%;
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.04) 0px 7px 29px 0px;
 }
 
 .sumario__titulo {
@@ -223,7 +228,7 @@ input[name="vacina__option"] {
 
 .sumario__lista {
     flex-direction: column;
-    gap:3px;
+    gap:10px;
     justify-content: center;
     padding: unset;
 }
@@ -236,13 +241,15 @@ input[name="vacina__option"] {
 
 .sumario__vacina {
     align-items: center;
-    gap: 3px;
+    gap: 10px;
     font-size: 13px;
+    font-weight: 500;
+    color: hsl(0, 0%, 30%);
 }
 
 .wrapper {
     margin-top: 10px;
-    padding: 30px;
+    padding: 40px;
     box-shadow: rgba(17, 12, 46, 0.05) 0px 48px 100px 0px;
     border-radius: 20px;
 }
@@ -291,4 +298,12 @@ form {
 .botoes {
     display: flex;
     gap: 20px;
+}
+
+.conteudo {
+    display: grid;
+    width: 100%;
+    max-width: 1200px;
+    grid-gap: 20px;
+    grid-template-columns: 1fr 1fr;
 }
