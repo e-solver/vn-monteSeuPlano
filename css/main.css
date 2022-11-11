@@ -33,10 +33,18 @@ input[type=number] {
     gap: 10px;
 }
 
+.preset__thumb {
+    max-width: 140px;
+}
+
+.vacina__thumb {
+    max-width: 110px;
+}
+
 .preset__thumb, .vacina__thumb {
-    max-width: 150px;
     height: auto;
     object-fit: cover;
+    text-align: center;
     object-position: center;
     border-radius: 15px;
 }
@@ -91,15 +99,19 @@ input[type=number] {
 .grupos {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 10px;
+    max-width: 1200px;
 }
 
 .grupo {
     display: flex;
-    padding: 22px 20px;
+    padding: 24px 20px;
     flex-direction: column;
     gap: 10px;
+    border: unset;
     appearance: none;
+    border-radius: 20px;
+    box-shadow: rgba(100, 100, 111, 0.04) 0px 7px 29px 0px;
 }
 
 .vacinas {
@@ -107,15 +119,39 @@ input[type=number] {
     gap: 10px;
 }
 
+.grupo__option {
+    font-size: 20px;
+    display: flex;
+    gap: 10px;
+    font-weight: 600;
+    color:hsl(0, 0%, 30%);
+    cursor: pointer;
+}
+
+input[type="checkbox"]{
+    transform: scale(1.4);
+}
+
+/* TO-DO: personalizar checkbox */
+
+input[name="vacina__option"] {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    transform: scale(1.6);
+}
+
 .vacina {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px;
     padding: 10px;
     position: relative;
-    max-width: 125px;
+    max-width: 120px;
     font-size: 12px;
     text-align: center;
+    cursor: pointer;
 }
 
 .ajusteQuantidade {
