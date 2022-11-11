@@ -345,3 +345,16 @@ form {
 .header__titulo {
     text-transform: lowercase;
 }
+
+.header__icon {
+    display: flex;
+    width: 48px;
+    height: 48px;
+    background-color: #9F39A5;
+    margin-bottom: 20px;
+    border-radius: 50px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px;
+}
