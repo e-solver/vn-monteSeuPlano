@@ -132,6 +132,10 @@ input[type="checkbox"]{
     transform: scale(1.4);
 }
 
+input[type="checkbox"]:checked, input[type="checkbox"]:indeterminate {
+    accent-color: #9F39A5!important;
+}
+
 /* TO-DO: personalizar checkbox */
 
 input[name="vacina__option"] {
