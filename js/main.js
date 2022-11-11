@@ -367,7 +367,7 @@ const botaoQuantidade = (vacina, idGrupo) => {
 
   html += `
     <div class="ajusteQuantidade">
-      <input type="number" name="quantidade__${idGrupo}-${sku}" id="quantidade__${idGrupo}-${sku}" class="ajusteQuantidade__valor" min="1" max="${quantidade}" placeholder=${newQuantidade}>
+      <input type="number" disabled name="quantidade__${idGrupo}-${sku}" id="quantidade__${idGrupo}-${sku}" class="ajusteQuantidade__valor" min="1" max="${quantidade}" placeholder=${newQuantidade}>
       <button class="ajusteQuantidade__diminuir" id="diminuir-vacina-${sku}">-</button>
       <button class="ajusteQuantidade__aumentar" id="aumentar-vacina-${sku}">+</button>
     </div>
@@ -411,12 +411,14 @@ const toggleVacina = (elVacina, checked) => {
     if (elBotao) {
       elBotao.style.display = "inline-flex";
       elQuantidade.value = elQuantidade.placeholder;
+      elQuantidade.disabled = false;
     }
   } else {
     elVacina.checked = false;
     if (elBotao) {
       elBotao.style.display = "none";
       elQuantidade.value = "";
+      elQuantidade.disabled = true;
     }
   }
 };
@@ -578,6 +580,7 @@ const enviarPlano = (e) => {
 const validarForm = (form) => {
   let formData = [...new FormData(form)];
   let elLog = form.querySelector(".log");
+  console.log(formData[0]);
 
   if (!formData[0]) {
     elLog.style.display = "flex";
