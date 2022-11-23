@@ -580,7 +580,6 @@ const enviarPlano = (e) => {
 const validarForm = (form) => {
   let formData = [...new FormData(form)];
   let elLog = form.querySelector(".log");
-  console.log(formData[0]);
 
   if (!formData[0]) {
     elLog.style.display = "flex";
